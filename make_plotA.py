@@ -27,6 +27,8 @@ def make_plotA(n, time, deltas):
     figure.tight_layout(pad=5.0)
     for h in range(3):
         for i in phi(Epb[h]):
+            j += 1
+            print(j)
             for x in deltaMu:
                 growth_rate[h].append(run_simulationA(n, x, i, Epb[h], T, time)[0])
                 j += 1

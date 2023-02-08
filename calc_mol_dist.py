@@ -5,7 +5,6 @@ k = 1.380649*(10**(-23))
 
 def calc_mol_dist(deltaMu, T):
     concentration = e ** (deltaMu/(k*T))*30
-    print(concentration)
     #solns = roots([2700000000000, 0, 30000, 1, -0.005])
     #poss = []
     #for x in solns:

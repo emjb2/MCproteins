@@ -114,5 +114,5 @@ def take_stepA(n, deltaMu, phi, Epb, T, buckets, mol_dist):
                         buckets[x] += 1      
     # return [buckets, NSi_change_remove, NSi_change_add, NFi_change_remove_F, NFi_change_add_F]
     # THIS ONE return [buckets, F_or_S, F_tried, F_succeed, S_tried, S_succeed, NSi_change_remove, NSi_change_add, NFi_change_remove_F, NFi_change_add_F]
-    return [buckets]
+    return buckets
     # return [buckets, F_or_S, F_tried, F_succeed, S_tried, S_succeed]
