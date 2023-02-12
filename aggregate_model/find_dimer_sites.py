@@ -1,4 +1,4 @@
-from find_neighbours import find_neighbours
+from general_functions.find_neighbours import find_neighbours
 
 def find_dimer_sites(n, loc, buckets):
     # order is right, left, down, up

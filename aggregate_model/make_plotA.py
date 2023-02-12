@@ -1,13 +1,13 @@
 #from numba import jit
-import take_step
-from run_simulationA import run_simulationA
+import monomer_model.take_step
+from aggregate_model.run_simulationA import run_simulationA
 import matplotlib.pyplot as plt
 import matplotlib
 import numpy as np
-from line_to_array import line_to_array
+from general_functions.line_to_array import line_to_array
 import seaborn
-from data_Ke_et_al import get_me_data
-import data
+from data.data_Ke_et_al import get_me_data
+import data.nadarajah_data as nadarajah_data
 import time as tme
 
 # @jit
