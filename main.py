@@ -10,4 +10,4 @@ if __name__ == "__main__":
   # make_plotA(30, 2000, 13)
   # make_single_plotA(30,200000,13)
   # make_size_investigation([30, 200, 1000], 1000, 13)
-  make_plot_final(30,1,13)
+  make_plot_final(30,200000,13)
