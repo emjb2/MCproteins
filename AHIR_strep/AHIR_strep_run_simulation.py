@@ -27,4 +27,4 @@ def AHIR_strep_run_simulation(n, time, deltaMu, T):
     
     return sum(heights)/time
 
-AHIR_strep_run_simulation(5, 1, 1, 1)
+#AHIR_strep_run_simulation(5, 1, 1, 1)
