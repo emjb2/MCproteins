@@ -12,4 +12,4 @@ if __name__ == "__main__":
   # make_single_plotA(30,200000,13)
   # make_size_investigation([30, 200, 1000], 1000, 13)
   # make_plot_final(30,200000,13)
-  make_plot_AHIR_strep.make_plot_AHIR_strep(29,200000,13)
+  make_plot_AHIR_strep.make_plot_AHIR_strep(29,20000,13)
