@@ -1,5 +1,5 @@
 from general_functions.find_neighbours import find_neighbours
-from AHIR_or_strep import AHIR_or_strep
+from AHIR_strep.AHIR_or_strep import AHIR_or_strep
 
 def how_many_strep_spaces(n, loc, heights):
     count = 0
@@ -12,9 +12,10 @@ def how_many_strep_spaces(n, loc, heights):
         would_be_height_with_added_AHIR = current_height + 2
         count += 1
         options.append(loc)
-    possible_neighbours = [x for x in find_neighbours(n, loc) if heights[x] == would_be_height_with_added_AHIR-1]
+    possible_neighbours = [x for x in find_neighbours(n, loc) if heights[x] in [would_be_height_with_added_AHIR-1, would_be_height_with_added_AHIR-2]]
     options += possible_neighbours
     #we are not allowing for overhang
     count = count + len(possible_neighbours) + 1 #you have space above
     # note the space above is not explicitly included in options, but is an option
+    # print([count, options, would_be_height_with_added_AHIR])
     return [count, options, would_be_height_with_added_AHIR]
