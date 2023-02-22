@@ -7,3 +7,4 @@ def how_many_neighbours(n, loc, heights, positions):
     if loc%2 == 0:
         neighbours.append("extra_below")
     return len(neighbours)
+    
