@@ -6,24 +6,30 @@ from AHIR_strep.AHIR_strep_take_step import AHIR_strep_take_step
 k = 1.380649*(10**(-23))
 
 def AHIR_strep_run_simulation(n, time, deltaMu, T):
-    positions = list(range(n))
-    positions += [x+n for x in positions if (x+n)%2==1]
-    add_on = []
-    for i in range(floor(n/2)):
-        add_on += [x+2*(i+1)*n for x in positions]
-    positions += add_on
-    dist = AHIR_strep_dist()
-    # positions list is complete
+    positions = list(range(n**2))
+    for i in range(int(n/2)):
+        for j in range(int(n/2)):
+            positions.remove((2*i+1)*n + (2*j+1))
+
+    strep_only = positions.copy()
+    for i in range(int(n/2)):
+        for j in range(int(n/2)):
+            strep_only.remove(2*i*n + 2*j)
+
+    both = [x for x in positions if not x in strep_only]
+
     heights = []
-    for i in range(n * (n+1)):
-        if i in positions:
+    for i in range(n**2):
+        if i in postions:
             heights.append(1)
         else:
             heights.append(0)
     # heights list is complete (we start with a fully formed 2D lattice)
 
+    dist = AHIR_strep_dist()
+
     for i in range(time):
-        heights = AHIR_strep_take_step(n, dist, positions, heights, deltaMu, T)
+        heights = AHIR_strep_take_step(n, dist, positions, strep_only, both, heights, deltaMu, T)
     
     return sum(heights)/time
 
