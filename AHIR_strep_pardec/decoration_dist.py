@@ -9,7 +9,7 @@ def decoration_dist():
     # return [15/36, 1/36, 1/36, 1/36, 1/36, 1/36, 1/36, 0]
 
     # 50/50 single strep and decorated AHIR, each AHIR decoration is in equal proportion to the others.
-    # return [1/14, 1/14, 1/14, 1/14, 1/14, 1/14, 1/14, 0.5]
+    return [1/14, 1/14, 1/14, 1/14, 1/14, 1/14, 1/14, 1/2]
 
     # just super decorated AHIR to check that my model isn't complete bullshit
-    return [0, 0, 0, 0, 0, 0, 1, 0]
+    #  return [0, 0, 0, 0, 0, 0, 1, 0]

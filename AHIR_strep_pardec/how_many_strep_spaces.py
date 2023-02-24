@@ -5,17 +5,15 @@ def how_many_strep_spaces(n, loc, heights):
     count = 0
     options = []
     current_height = heights[loc]
-    # finding what the height would be with another AHIR
-    if current_height%2 == 0:
-        would_be_height_with_added_AHIR = current_height + 1
-    else:
-        would_be_height_with_added_AHIR = current_height + 2
-        count += 1
+    # find what the height would be if we add the AHIR
+    if heights[loc]%2 == 1:
+        height_with_new_AHIR = current_height + 2
         options.append(loc)
-    possible_neighbours = [x for x in find_neighbours(n, loc) if heights[x] in [would_be_height_with_added_AHIR-1, would_be_height_with_added_AHIR-2]]
-    options += possible_neighbours
-    #we are not allowing for overhang
-    count = count + len(possible_neighbours) + 1 #you have space above
-    # note the space above is not explicitly included in options, but is an option
-    # print([count, options, would_be_height_with_added_AHIR])
-    return [count, options, would_be_height_with_added_AHIR]
+    else:
+        height_with_new_AHIR = current_height + 1
+
+    options = options + [x for x in find_neighbours(n, loc) if heights[x] in [height_with_new_AHIR-1, height_with_new_AHIR-2]]
+    # count will also count the strep you can place above.
+    count += len(options) + 1
+
+    return [count, options, height_with_new_AHIR]

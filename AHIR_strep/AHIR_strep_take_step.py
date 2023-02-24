@@ -36,6 +36,14 @@ def AHIR_strep_take_step(n, AHIR_strep_dist, positions, strep_only, both, height
             z2 = uniform(0,1)
             if z2 < e ** (total_links[whats_there_now]-how_many_neighbours(n, current_stack, heights, positions))/ (e ** (total_links[whats_there_now]-1)):
                 heights[current_stack] -= 1
+                #remove strep and strep possibilities
+                if current_stack in both and heights[current_stack] == 0:
+                    neighbours = find_neighbours(n, current_stack)
+                    for i in neighbours:
+                        i_neighbours_heights = [1 for x in find_neighbours(n, i) if x in positions if heights[x] >= heights[i]]
+                        if sum(i_neighbours_heights) == 0:
+                            heights[i] -= 2
+
     else:
         if z < attachment_prob/summ and is_attachment_possible == 1:
             heights[current_stack] += 1

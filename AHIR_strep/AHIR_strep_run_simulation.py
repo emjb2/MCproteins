@@ -20,7 +20,7 @@ def AHIR_strep_run_simulation(n, time, deltaMu, T):
 
     heights = []
     for i in range(n**2):
-        if i in postions:
+        if i in positions:
             heights.append(1)
         else:
             heights.append(0)

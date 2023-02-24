@@ -16,4 +16,4 @@ if __name__ == "__main__":
   # make_plot_final(30,200000,13)
   # make_plot_AHIR_strep.make_plot_AHIR_strep(29,20000,13)
   #make_plot_AHIR_strep_pardec(29,200,20)
-  check_surface()
+  check_surface(2000)

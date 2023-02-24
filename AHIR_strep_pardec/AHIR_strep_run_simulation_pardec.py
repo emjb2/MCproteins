@@ -4,6 +4,7 @@ from AHIR_strep.AHIR_strep_dist import AHIR_strep_dist
 from AHIR_strep.AHIR_strep_take_step import AHIR_strep_take_step
 from AHIR_strep_pardec.AHIR_strep_pardec_take_step import AHIR_strep_pardec_take_step
 from AHIR_strep_pardec.decoration_dist import decoration_dist
+from AHIR_strep_pardec.strep_check import strep_check
 
 k = 1.380649*(10**(-23))
 
@@ -29,9 +30,12 @@ def AHIR_strep_run_simulation_pardec(n, time, deltaMu, T):
             heights.append(0)         
 
     dist = decoration_dist()
-
+    j = 0
     for i in range(time):  
+        j +=1
+        #print("count: "+str(j))
         heights = AHIR_strep_pardec_take_step(n, positions, strep_only, both, heights, deltaMu, T, dist)    
+    heights = strep_check(n, positions, strep_only, heights)
 
     return [sum(heights)/time, heights]
 
