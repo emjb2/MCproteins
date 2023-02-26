@@ -9,7 +9,7 @@ from general_functions.find_neighbours import find_neighbours
 
 k = 1.380649*(10**(-23))
 
-def AHIR_strep_take_step(n, AHIR_strep_dist, positions, strep_only, both, heights, deltaMu, T):
+def AHIR_strep_take_step(n, AHIR_strep_dist, positions, strep_only, both, heights, deltaMu, T, Epb):
     current_stack = choices(positions, k=1)[0]
     current_height = heights[current_stack]
     edited_heights = heights
@@ -20,7 +20,7 @@ def AHIR_strep_take_step(n, AHIR_strep_dist, positions, strep_only, both, height
     total_links = {0: 2, 1: 6}
     z = uniform(0,1)
     attachment_prob = e ** (deltaMu / (k*T))
-    detachment_prob = e ** (total_links[whats_there_now]-how_many_neighbours(n, current_stack, heights, positions))
+    detachment_prob = e ** (6*Epb-how_many_neighbours(n, current_stack, heights, positions)*Epb)
     summ = attachment_prob + detachment_prob
     attachment_possible = is_attachment_possible(n, current_stack, heights, strep_only)
     if current_height > 1:
@@ -32,9 +32,9 @@ def AHIR_strep_take_step(n, AHIR_strep_dist, positions, strep_only, both, height
                     for i in neighbours:
                         heights[i] == heights[current_stack]-1
 
-        elif z > detachment_prob/summ:
+        elif z > attachment_prob/summ:
             z2 = uniform(0,1)
-            if z2 < e ** (total_links[whats_there_now]-how_many_neighbours(n, current_stack, heights, positions))/ (e ** (total_links[whats_there_now]-1)):
+            if z2 < e ** ((6-how_many_neighbours(n, current_stack, heights, positions))*Epb)/ (e ** (5*Epb)):
                 heights[current_stack] -= 1
                 #remove strep and strep possibilities
                 if current_stack in both and heights[current_stack] == 0:

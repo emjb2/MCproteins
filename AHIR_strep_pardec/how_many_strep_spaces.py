@@ -12,7 +12,7 @@ def how_many_strep_spaces(n, loc, heights):
     else:
         height_with_new_AHIR = current_height + 1
 
-    options = options + [x for x in find_neighbours(n, loc) if heights[x] in [height_with_new_AHIR-1, height_with_new_AHIR-2]]
+    options = options + [x for x in find_neighbours(n, loc) if heights[x] in [height_with_new_AHIR-1, height_with_new_AHIR-2]]+["above"]
     # count will also count the strep you can place above.
     count += len(options) + 1
 

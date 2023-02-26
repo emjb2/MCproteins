@@ -5,7 +5,7 @@ from AHIR_strep.AHIR_strep_take_step import AHIR_strep_take_step
 
 k = 1.380649*(10**(-23))
 
-def AHIR_strep_run_simulation(n, time, deltaMu, T):
+def AHIR_strep_run_simulation(n, time, deltaMu, T, Epb):
     positions = list(range(n**2))
     for i in range(int(n/2)):
         for j in range(int(n/2)):
@@ -29,7 +29,7 @@ def AHIR_strep_run_simulation(n, time, deltaMu, T):
     dist = AHIR_strep_dist()
 
     for i in range(time):
-        heights = AHIR_strep_take_step(n, dist, positions, strep_only, both, heights, deltaMu, T)
+        heights = AHIR_strep_take_step(n, dist, positions, strep_only, both, heights, deltaMu, T, Epb)
     
     return sum(heights)/time
 

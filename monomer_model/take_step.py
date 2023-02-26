@@ -44,7 +44,7 @@ def take_step(n, deltaMu, phi, Epb, T, buckets):
             S_tried = find_type(n, buckets, loc)
             z2 = random.uniform(0, 1)
             bond_number = ((find_type(n, buckets, loc)+1)/6)*(phi/Epb)
-            if z2 < (math.e ** ((bond_number * Epb / (k * T))))/(math.e ** (((1/6)*(phi/Epb) * Epb / (k * T)))):
+            if z2 < (math.e ** ((((phi/Epb)-bond_number) * Epb / (k * T))))/(math.e ** ((((phi/Epb) -1)* Epb / (k * T)))):
                 NSi_change_remove = [find_type(n, buckets, x) for x in c]
                 NFi_change_remove_F = [find_F_type(n, buckets, x) for x in c]
                 buckets[loc] -= 1
