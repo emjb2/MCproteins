@@ -10,9 +10,10 @@ import data.nadarajah_data as nadarajah_data
 import time as tme
 from general_functions.monomer_dimer_tetramer import plot_monomer_dimer_tetramer
 from matplotlib import colors
+from AHIR_strep.AHIR_strep_run_simulation import AHIR_strep_run_simulation
 
 # @jit
-def make_plotA_final(n, time, deltas):
+def make_plot_final_AHIR_strep(n, time, deltas):
     start_time = tme.time()
     # first set our parameters
     k = 1.380649 * (10 ** (-23))
@@ -28,13 +29,12 @@ def make_plotA_final(n, time, deltas):
     #figure.tight_layout(pad=5.0)
     trial_end=[]
     for h in range(1):
-        for i in phi(Epb[h]):
-            for x in deltaMu:
-                growth_rate[h].append(run_simulationA(n, x, i, Epb[h], T, time)[0])
-                if x == 12*k*T and h == 0:
-                    trial_end.append(growth_rate[h][-1])
-                j += 1
-                print(j)
+        for x in deltaMu:
+            growth_rate[h].append(AHIR_strep_run_simulation(n, time, x, T))
+            if x == 12*k*T and h == 0:
+                trial_end.append(growth_rate[h][-1])
+            j += 1
+            print(j)
     trial_mean = sum(trial_end)/len(trial_end)
     colours =['b', 'orange', 'g', 'r']
     trial_points = []

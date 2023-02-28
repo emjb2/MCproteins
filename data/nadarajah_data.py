@@ -14,5 +14,5 @@ def get_me_data():
     for j in coords:
         coord = j.split(", ")
         x.append(log10(float(coord[0])))
-        y.append((float(coord[1])))
+        y.append(log10(float(coord[1])))
     return [x,y]

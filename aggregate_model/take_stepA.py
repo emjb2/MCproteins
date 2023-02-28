@@ -60,7 +60,7 @@ def take_stepA(n, deltaMu, phi, Epb, T, buckets, mol_dist, attachment_attempts, 
             if z2 == 0:
                 z3 = random.uniform(0, 1)
                 bond_number = ((find_type(n, buckets, loc)+1)/6)*(phi/Epb)
-                if z3 < (math.e ** ((bond_number * Epb / (k * T))))/(2*(math.e ** (((1/6)*(phi/Epb) * Epb / (k * T))))):
+                if z3 < (math.e ** ((((phi/Epb)-bond_number) * Epb / (k * T))))/(math.e ** (((((5/6)*phi/Epb))* Epb / (k * T)))):
                     removal_count += 1
                     buckets[loc] -= 1
             elif z2 == 1:
