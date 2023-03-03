@@ -17,6 +17,8 @@ from monomer_model.make_plot_final_surface import make_plot_final_surface
 from aggregate_model.make_plotA_final_surface import make_plotA_final_surface
 from aggregate_model.nadarajah_comparison import nadarajah_comparison
 from AHIR_strep.make_plot_final_AHIR_strep import make_plot_final_AHIR_strep
+from AHIR_strep.make_plot_final_surface_AHIR_strep import make_plot_final_surface_AHIR_strep
+from AHIR_strep_pardec.make_plot_final_pardec import make_plot_final_pardec
 
 if __name__ == "__main__":
   # make_plot(30,200000,13)
@@ -34,7 +36,9 @@ if __name__ == "__main__":
   # make_plotA_final(30, 100000, 13)
   # plot_monomer_dimer_tetramer()
   # plot_monomer_dimer_tetramer()
-  # make_plot_final_surface(30, 50000, 20)
+  # make_plot_final_surface(30, 1000, 15)
   # make_plotA_final_surface(30, 50000, 13)
   # nadarajah_comparison(30,50000,13)
-  make_plot_final_AHIR_strep(30,100000,20)
+  # make_plot_final_AHIR_strep(30,100000,20)
+  # make_plot_final_surface_AHIR_strep(30,50000,20)
+  make_plot_final_pardec(30,5000,20)
