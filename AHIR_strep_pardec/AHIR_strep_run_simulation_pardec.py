@@ -8,7 +8,8 @@ from AHIR_strep_pardec.strep_check import strep_check
 
 k = 1.380649*(10**(-23))
 
-def AHIR_strep_run_simulation_pardec(n, time, deltaMu, T, Epb):
+def AHIR_strep_run_simulation_pardec(n, time, deltaMu, T, Epb, phi):
+    track = 0
     positions = list(range(n**2))
     for i in range(int(n/2)):
         for j in range(int(n/2)):
@@ -29,14 +30,20 @@ def AHIR_strep_run_simulation_pardec(n, time, deltaMu, T, Epb):
         else:
             heights.append(0)         
 
-    dist = decoration_dist()
+    dist = decoration_dist(deltaMu)
     j = 0
     for i in range(time):  
         j +=1
         #print("count: "+str(j))
-        heights = AHIR_strep_pardec_take_step(n, positions, strep_only, both, heights, deltaMu, T, dist, Epb)    
+        [heights, track] = AHIR_strep_pardec_take_step(n, positions, strep_only, both, heights, deltaMu, T, dist, Epb, phi, track)    
     heights = strep_check(n, positions, strep_only, heights)
 
-    return [sum(heights)/time, heights]
+    summ = 0
 
-#AHIR_strep_run_simulation(5, 1, 1, 1)
+    for i in both:
+        summ += (heights[i]-1)
+    for i in strep_only:
+        summ += (heights[i]-1)//2
+    
+    
+    return [summ/time, track/time, heights]

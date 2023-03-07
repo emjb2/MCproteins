@@ -31,7 +31,7 @@ def make_plot_final_surface(n, time, deltas):
         for i in phi(Epb[h]):
             for x in deltaMu:
                 temp = []
-                for g in range(3):
+                for g in range(10):
                     temp.append(stdev(run_simulation(n, x, i, Epb[h], T, time)[1]))
                 errors[h].append(stdev(temp))
                 surface_roughness[h].append(mean(temp))
