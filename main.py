@@ -19,6 +19,7 @@ from aggregate_model.nadarajah_comparison import nadarajah_comparison
 from AHIR_strep.make_plot_final_AHIR_strep import make_plot_final_AHIR_strep
 from AHIR_strep.make_plot_final_surface_AHIR_strep import make_plot_final_surface_AHIR_strep
 from AHIR_strep_pardec.make_plot_final_pardec import make_plot_final_pardec
+from AHIR_strep_pardec.final_surface_pardec import final_surface_pardec
 
 if __name__ == "__main__":
   # make_plot(30,200000,13)
@@ -41,4 +42,5 @@ if __name__ == "__main__":
   # nadarajah_comparison(30,50000,13)
   # make_plot_final_AHIR_strep(30,100000,20)
   # make_plot_final_surface_AHIR_strep(30,50000,20)
-  make_plot_final_pardec(30,5000,20)
+  # make_plot_final_pardec(30,50000,20)
+  final_surface_pardec(30,50000,20)
