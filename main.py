@@ -20,6 +20,8 @@ from AHIR_strep.make_plot_final_AHIR_strep import make_plot_final_AHIR_strep
 from AHIR_strep.make_plot_final_surface_AHIR_strep import make_plot_final_surface_AHIR_strep
 from AHIR_strep_pardec.make_plot_final_pardec import make_plot_final_pardec
 from AHIR_strep_pardec.final_surface_pardec import final_surface_pardec
+from monomer_model.calibrate_lattice_size_roughness import calibrate_lattice_size_roughness
+from monomer_model.calibrate_time_steps_roughness import calibrate_time_steps_roughness
 
 if __name__ == "__main__":
   # make_plot(30,200000,13)
@@ -31,8 +33,10 @@ if __name__ == "__main__":
   # make_plot_AHIR_strep_pardec(29,200,20)
   # check_surface(200000)
   # make_Ke_comparison_plot(30,200000,13)
-  # calibrate_lattice_size(100, 10000, 13)
-  # calibrate_time_steps(30, 13)
+  # calibrate_lattice_size(10000, 13)
+  # calibrate_lattice_size_roughness(50000,13)
+  calibrate_time_steps(30, 13)
+  # calibrate_time_steps_roughness(30, 13)
   # plot_nadarajah2()
   # make_plotA_final(30, 100000, 13)
   # plot_monomer_dimer_tetramer()
@@ -43,4 +47,4 @@ if __name__ == "__main__":
   # make_plot_final_AHIR_strep(30,100000,20)
   # make_plot_final_surface_AHIR_strep(30,50000,20)
   # make_plot_final_pardec(30,50000,20)
-  final_surface_pardec(30,50000,20)
+  # final_surface_pardec(30,50000,20)
