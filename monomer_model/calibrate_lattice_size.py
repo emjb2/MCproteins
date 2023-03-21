@@ -1,4 +1,3 @@
-from numba import jit
 import monomer_model.take_step
 from monomer_model.run_simulation import run_simulation
 import matplotlib.pyplot as plt
@@ -11,20 +10,19 @@ from data.data_Ke_et_al import get_me_data
 import data.nadarajah_data as nadarajah_data
 import time as tme
 
-# @jit
-def calibrate_lattice_size(n, time, deltas):
+def calibrate_lattice_size(time, deltas):
     start_time = tme.time()
     # first set our parameters
     k = 1.380649 * (10 ** (-23))
     T = 290
     Epb = 2*k*T
     deltaMu = [x*k*T for x in range(0, deltas)]
-    growth_rate = [[],[],[],[]]
-    errorbars = [[],[],[],[]]
+    growth_rate = [[],[],[],[],[]]
+    errorbars = [[],[],[],[],[]]
     phi = 3*Epb
     j=0
-    sizes = [10, 30, 50, 100]
-    for i in range(0,4):
+    sizes = [10, 30, 100, 500, 1000]
+    for i in range(0,5):
         for x in deltaMu:
             temp_data = []
             for g in range(10):
@@ -33,14 +31,20 @@ def calibrate_lattice_size(n, time, deltas):
             errorbars[i].append(np.std(temp_data))
             j += 1
             print(j)
-    colours = ['b', 'm', 'g', 'r']
-    for y in range(0,4):
-        plt.errorbar(range(0,deltas), growth_rate[y], yerr = errorbars[y], marker='.', label="n = "+str(sizes[y]))
+    intermediate = [min(growth_rate[i]) for i in range(len(growth_rate))]
+    intermediate2 = [max(growth_rate[i]) for i in range(len(growth_rate))]
+    errorbarlims = [max(errorbars[i]) for i in range(len(errorbars))]
+    [xmin, xmax, ymin, ymax] = [0, deltas-1, 0, max(intermediate2)]
+    colours = ['midnightblue', 'lightskyblue', 'forestgreen', 'gold', 'mediumvioletred']
+    for y in range(0,5):
+        plt.errorbar(range(0,deltas), growth_rate[y], yerr = errorbars[y], marker='.', label="n = "+str(sizes[y]), color = colours[y])
         #axis[0].plot(range(0,deltas), ke_data[0][13 * y:deltas * (y+1)], colours[-y-1])
         plt.title(r'$E_{pb}$=2*$(kT)$, $\phi$ = 3')
         plt.xlabel(r'$\Delta$$\mu$ in multiples of $kT$')
         plt.ylabel('Growth Rate')
-        plt.legend()
+    plt.xlim(xmin, xmax)
+    plt.ylim(ymin, ymax + max(errorbarlims))
+    plt.legend()
     
     print(tme.time() - start_time)
     #plt.savefig('make_plotA_final.png')
