@@ -1,7 +1,7 @@
 from math import e
 
 
-def decoration_dist(deltaMu):
+def decoration_dist():
     # here's Dan's approximation dist, description found in paper.
     k = 1.380649*(10**(-23))
     T = 300
@@ -34,6 +34,3 @@ def decoration_dist(deltaMu):
     ##    distt = [list1[i]+list2[i] for i in range(8)]
     
     return distt
-
-print(decoration_dist(2))
-

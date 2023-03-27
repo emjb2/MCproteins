@@ -48,9 +48,8 @@ def calibrate_time_steps(n, deltas):
     plt.xlim(xmin, xmax)
     plt.ylim(ymin, ymax + max(errorbarlims))
     plt.legend()
-    plt.show()
     
-    plt.savefig('time step calibration DONE.png')
+    plt.savefig('IKEA time step calibration.png')
    # plt.savefig('calibrate_time_steps2.pdf')
     print(tme.time() - start_time)
    # plt.plot([x*k*T for x in deltaMu], growth_rate[0:13], label=2)

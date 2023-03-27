@@ -23,8 +23,8 @@ def calibrate_time_steps_roughness(n, deltas):
     errorbars = [[],[],[],[],[],[]]
     phi = 3*Epb
     j=0
-    times=[10, 10, 10, 10, 10, 10]
-    #times = [1000, 10000, 50000, 100000, 200000, 500000]
+    #times=[10, 10, 10, 10, 10, 10]
+    times = [1000, 10000, 50000, 100000, 200000, 500000]
     for i in range(0,6):
         for x in deltaMu:
             temp_data = []
@@ -42,15 +42,14 @@ def calibrate_time_steps_roughness(n, deltas):
     for y in range(0,6):
         plt.errorbar(range(0,deltas), growth_rate[y], yerr = errorbars[y], marker='.', label="number of moves = "+str(times[y]), color = colours[y])
         #axis[0].plot(range(0,deltas), ke_data[0][13 * y:deltas * (y+1)], colours[-y-1])
-    plt.title(r'$E_{pb}$=2$kT$, $\phi = 3$')
+    plt.title(r'$E_{pb}$=2$kT$, $\phi = 3E_{pb}$')
     plt.xlabel(r'$\Delta$$\mu$ in multiples of $kT$')
     plt.ylabel('Surface Roughness')
     plt.xlim(xmin, xmax)
     plt.ylim(ymin, ymax + max(errorbarlims))
     plt.legend()
-    plt.show()
     
-    plt.savefig('time step calibration DONE.png')
+    plt.savefig('IKEA time step calibration roughness-2.png')
    # plt.savefig('calibrate_time_steps2.pdf')
     print(tme.time() - start_time)
    # plt.plot([x*k*T for x in deltaMu], growth_rate[0:13], label=2)

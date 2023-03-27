@@ -10,10 +10,10 @@ import data.nadarajah_data as nadarajah_data
 import time as tme
 from general_functions.monomer_dimer_tetramer import plot_monomer_dimer_tetramer
 from matplotlib import colors
-from AHIR_strep.AHIR_strep_run_simulation import AHIR_strep_run_simulation
+from AHIR_strep.AHIR_strep_run_simulation_same_detach_AHIR_strep import AHIR_strep_run_simulation_same_detach_AHIR_strep
 
 # @jit
-def make_plot_final_AHIR_strep(n, time, deltas):
+def make_plot_final_AHIR_strep_same_detach(n, time, deltas):
     # first set our parameters
     k = 1.380649 * (10 ** (-23))
     T = 290
@@ -29,7 +29,7 @@ def make_plot_final_AHIR_strep(n, time, deltas):
         for g in range(4):
             for k in range(10):
                 for x in deltaMu:
-                    growth_rate[h].append(AHIR_strep_run_simulation(n, time, x, T, Epb[h], phi(Epb[h])[g])[0])
+                    growth_rate[h].append(AHIR_strep_run_simulation_same_detach_AHIR_strep(n, time, x, T, Epb[h], phi(Epb[h])[g])[0])
                     j += 1
                     print(j)
     colours = ['mediumvioletred', 'lightskyblue', 'forestgreen', 'gold']
@@ -56,5 +56,5 @@ def make_plot_final_AHIR_strep(n, time, deltas):
         axis[2].set_ylim(ymin, ymax*1.05)   
         axis[2].legend()
     
-    plt.savefig('IKEA AHIR strep 50000 .png')
+    plt.savefig('IKEA AHIR strep same detach 50000 .png')
     #plt.savefig('make_plotA_final2.pdf')

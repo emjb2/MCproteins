@@ -49,7 +49,6 @@ def calibrate_lattice_size_roughness(time, deltas):
     print(tme.time() - start_time)
     #plt.savefig('make_plotA_final.png')
     #plt.savefig('make_plotA_final.pdf')
-    plt.show()
    # plt.plot([x*k*T for x in deltaMu], growth_rate[0:13], label=2)
    # dummy2=run_simulation(30, deltaMu[4], phi[2], Epb, T, time)
    # print(line_to_array(dummy2[1],30))

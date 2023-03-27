@@ -10,11 +10,11 @@ import data.nadarajah_data as nadarajah_data
 import time as tme
 from general_functions.monomer_dimer_tetramer import plot_monomer_dimer_tetramer
 from matplotlib import colors
-from AHIR_strep.AHIR_strep_run_simulation import AHIR_strep_run_simulation
+from AHIR_strep.AHIR_strep_run_simulation_same_detach_AHIR_strep import AHIR_strep_run_simulation_same_detach_AHIR_strep
 from statistics import stdev, mean
 
 # @jit
-def make_plot_final_surface_AHIR_strep(n, time, deltas):
+def make_plot_final_surface_AHIR_strep_same_detach(n, time, deltas):
     start_time = tme.time()
     # first set our parameters
     k = 1.380649 * (10 ** (-23))
@@ -33,7 +33,7 @@ def make_plot_final_surface_AHIR_strep(n, time, deltas):
             for x in deltaMu:
                 temp = []
                 for l in range(10):
-                    soln = AHIR_strep_run_simulation(n, time, x, T, Epb[h], phi(Epb[h])[g])[2]
+                    soln = AHIR_strep_run_simulation_same_detach_AHIR_strep(n, time, x, T, Epb[h], phi(Epb[h])[g])[2]
                     soln2 = [x for x in soln if x != 0]
                     stdeviation = stdev(soln2)
                     temp.append(stdeviation)
@@ -67,4 +67,4 @@ def make_plot_final_surface_AHIR_strep(n, time, deltas):
         axis[2].legend()
     
     print(tme.time() - start_time)
-    plt.savefig('IKEA AHIR strep surface 50000.png')
+    plt.savefig('IKEA AHIR strep surface same detach 50000.png')

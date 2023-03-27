@@ -37,27 +37,38 @@ def make_plot_final_surface(n, time, deltas):
                 surface_roughness[h].append(mean(temp))
                 j += 1
                 print(j)
-    colours = ['b', 'm', 'g', 'r']
+    colours = ['mediumvioletred', 'lightskyblue', 'forestgreen', 'gold']
+    intermediate = min(surface_roughness[0]+surface_roughness[1]+surface_roughness[2])
+    intermediate2 = max(surface_roughness[0]+surface_roughness[1]+surface_roughness[2])
+    errorbarlims = max(errors[0]+errors[1]+errors[2])
     for y in range(0,4):
-        axis[0].errorbar(range(0,deltas), surface_roughness[0][deltas * y:deltas * (y+1)], yerr = errors[0][deltas * y:deltas * (y+1)], marker='.', label=r"$\phi$ = "+str(y+2)+r"$E_{pb}$")
+        [xmin, xmax, ymin, ymax] = [0, deltas-1, 0, intermediate2]
+        axis[0].errorbar(range(0,deltas), surface_roughness[0][deltas * y:deltas * (y+1)], yerr = errors[0][deltas * y:deltas * (y+1)], marker='.', label=r"$\phi$ = "+str(y+2)+r"$E_{pb}$", color=colours[y])
         axis[0].set_title(r'$E_{pb}=kT$')
         axis[0].set(xlabel=r'$\Delta$$\mu$ in multiples of $kT$', ylabel='Surface Roughness')
+        axis[0].set_xlim(xmin, xmax)
+        axis[0].set_ylim(ymin, ymax*1.05)           
         axis[0].legend()
         #axis[1].plot(range(0,deltas), ke_data[1][deltas * y:deltas * (y+1)], colours[-y-1])
-        axis[1].errorbar(range(0,deltas), surface_roughness[1][deltas * y:deltas * (y+1)], yerr = errors[1][deltas * y:deltas * (y+1)], marker='.', label=r"$\phi$ = "+str(y+2)+r"$E_{pb}$")
+        [xmin, xmax, ymin, ymax] = [0, deltas-1, 0, intermediate2]
+        axis[1].errorbar(range(0,deltas), surface_roughness[1][deltas * y:deltas * (y+1)], yerr = errors[1][deltas * y:deltas * (y+1)], marker='.', label=r"$\phi$ = "+str(y+2)+r"$E_{pb}$", color=colours[y])
         axis[1].set_title(r'$E_{pb}=2kT$')
         axis[1].set(xlabel='$\Delta$$\mu$ in multiples of $kT$', ylabel='Surface Roughness')
+        axis[1].set_xlim(xmin, xmax)
+        axis[1].set_ylim(ymin, ymax*1.05)           
         axis[1].legend()
         #axis[2].plot(range(0,deltas), ke_data[2][deltas * y:deltas * (y+1)], colours[-y-1])
-        axis[2].errorbar(range(0,deltas), surface_roughness[2][deltas * y:deltas * (y+1)], yerr = errors[2][deltas * y:deltas * (y+1)], marker='.', label=r"$\phi$ = "+str(y+2)+r"$E_{pb}$")
+        [xmin, xmax, ymin, ymax] = [0, deltas-1, 0, intermediate2]
+        axis[2].errorbar(range(0,deltas), surface_roughness[2][deltas * y:deltas * (y+1)], yerr = errors[2][deltas * y:deltas * (y+1)], marker='.', label=r"$\phi$ = "+str(y+2)+r"$E_{pb}$", color=colours[y])
         axis[2].set_title(r'$E_{pb}=3kT$')
         axis[2].set(xlabel='$\Delta$$\mu$ in multiples of $kT$', ylabel='Surface Roughness')
+        axis[2].set_xlim(xmin, xmax)
+        axis[2].set_ylim(ymin, ymax*1.05)           
         axis[2].legend()
     
     print(tme.time() - start_time)
-    #plt.savefig('make_plotA_final3.png')
+    plt.savefig('IKEA make_plot_roughness_50000.png')
     #plt.savefig('make_plotA_final3.pdf')
-    plt.show()
    # plt.plot([x*k*T for x in deltaMu], growth_rate[0:13], label=2)
    # dummy2=run_simulation(30, deltaMu[4], phi[2], Epb, T, time)
    # print(line_to_array(dummy2[1],30))

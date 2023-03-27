@@ -1,28 +1,26 @@
-#from numba import jit
-from aggregate_model.run_simulationA import run_simulationA
 import matplotlib.pyplot as plt
-import matplotlib
 import numpy as np
+import time as tme
+from AHIR_strep_pardec.AHIR_strep_run_simulation_pardec import AHIR_strep_run_simulation_pardec
 from general_functions.line_to_array import line_to_array
 import seaborn
-from data.data_Ke_et_al import get_me_data
-import data.nadarajah_data as nadarajah_data
-import time as tme
-from general_functions.monomer_dimer_tetramer import plot_monomer_dimer_tetramer
-from statistics import stdev, mean
+from AHIR_strep_pardec.decoration_dist import decoration_dist
+from math import floor
+from statistics import mean
+from statistics import stdev
 
-# @jit
-def make_plotA_final_surface(n, time, deltas):
+def check_different_phi_surface(n, time, deltas):
+    dist = [k*(1-0.2) for k in decoration_dist()]+[0.2]
     start_time = tme.time()
     # first set our parameters
     k = 1.380649 * (10 ** (-23))
     T = 290
-    Epb = [1*k*T, 2*k*T, 3*k*T]
-    deltaMu = [x*k*T for x in range(0, deltas)]
-    surface_roughness = [[], [], []]
-    errors =[[],[],[]]
+    Epb = [k*T, 2*k*T, 3*k*T]
     def phi(Epb):
         return [2*Epb, 3*Epb, 4*Epb, 5*Epb]
+    deltaMu = [x*k*T for x in range(0, deltas)]
+    roughness = [[],[],[]]
+    errors = [[],[],[]]
     j=0
     figure, axis = plt.subplots(1, 3, figsize=(15,7))
     figure.tight_layout(pad=5.0)
@@ -31,39 +29,41 @@ def make_plotA_final_surface(n, time, deltas):
             for x in deltaMu:
                 temp = []
                 for g in range(3):
-                    temp.append(stdev(run_simulationA(n, x, i, Epb[h], T, time)[1]))
-                surface_roughness[h].append(mean(temp))
+                    temp.append(stdev(AHIR_strep_run_simulation_pardec(n, time, x, T, Epb[h], i, dist)[2]))
+                roughness[h].append(mean(temp))
                 errors[h].append(stdev(temp))
                 j += 1
                 print(j)
+    print(errors)
     colours = ['mediumvioletred', 'lightskyblue', 'forestgreen', 'gold']
-    intermediate = min(surface_roughness[0]+surface_roughness[1]+surface_roughness[2])
-    intermediate2 = max(surface_roughness[0]+surface_roughness[1]+surface_roughness[2]) 
+    intermediate = min(roughness[0]+roughness[1]+roughness[2])
+    intermediate2 = max(roughness[0]+roughness[1]+roughness[2]) 
     errorbarlims = [max(errors[i]) for i in range(len(errors))]  
     for y in range(0,4):
         [xmin, xmax, ymin, ymax] = [0, deltas-1, 0, intermediate2]
-        axis[0].errorbar(range(0,deltas), surface_roughness[0][deltas * y:deltas * (y+1)], errors[0][deltas * y:deltas * (y+1)], marker = '.', color=colours[y], label=r"$\phi$ = "+str(y+2)+r"$E_{pb}$")
+        axis[0].errorbar(range(0,deltas), roughness[0][deltas * y:deltas * (y+1)], errors[0][deltas * y:deltas * (y+1)], marker = '.', color=colours[y], label=r"$\phi$ = "+str(y+2)+r"$E_{pb}$")
         #axis[0].plot(range(0,deltas), ke_data[0][13 * y:deltas * (y+1)], colours[-y-1])
         axis[0].set_title(r'$E_{pb}=1kT$')
         axis[0].set(xlabel=r'$\Delta$$\mu$ in multiples of $kT$', ylabel='Surface Roughness')
-        axis[0].set_xlim(xmin, xmax)
+        axis[0].set_xlim(0, deltas-1)
         axis[0].set_ylim(ymin, ymax+max(errorbarlims))         
         axis[0].legend()
         #axis[1].plot(range(0,deltas), ke_data[1][deltas * y:deltas * (y+1)], colours[-y-1])
-        axis[1].errorbar(range(0,deltas), surface_roughness[1][deltas * y:deltas * (y+1)], errors[1][deltas * y:deltas * (y+1)], marker = '.', color=colours[y], label=r"$\phi$ = "+str(y+2)+r"$E_{pb}$")
+        axis[1].errorbar(range(0,deltas), roughness[1][deltas * y:deltas * (y+1)], errors[1][deltas * y:deltas * (y+1)], marker = '.', color=colours[y], label=r"$\phi$ = "+str(y+2)+r"$E_{pb}$")
         axis[1].set_title(r'$E_{pb}=2kT$')
         axis[1].set(xlabel='$\Delta$$\mu$ in multiples of $kT$', ylabel='Surface Roughness')
-        axis[1].set_xlim(xmin, xmax)
+        axis[1].set_xlim(0, deltas-1)
         axis[1].set_ylim(ymin, ymax+max(errorbarlims))        
         axis[1].legend()
         #axis[2].plot(range(0,deltas), ke_data[2][deltas * y:deltas * (y+1)], colours[-y-1])
-        axis[2].errorbar(range(0,deltas), surface_roughness[2][deltas * y:deltas * (y+1)], errors[2][deltas * y:deltas * (y+1)], marker = '.', color=colours[y], label=r"$\phi$ = "+str(y+2)+r"$E_{pb}$")
+        axis[2].errorbar(range(0,deltas), roughness[2][deltas * y:deltas * (y+1)], errors[2][deltas * y:deltas * (y+1)], marker = '.', color=colours[y], label=r"$\phi$ = "+str(y+2)+r"$E_{pb}$")
         axis[2].set_title(r'$E_{pb}=3kT$')
         axis[2].set(xlabel='$\Delta$$\mu$ in multiples of $kT$', ylabel='Surface Roughness')
-        axis[2].set_xlim(xmin, xmax)
+        axis[2].set_xlim(0, deltas-1)
         axis[2].set_ylim(ymin, ymax+max(errorbarlims))        
         axis[2].legend()
     
     print(tme.time() - start_time)
-    plt.savefig('IKEA make_plotA surface 100000.png')
+    plt.savefig('IKEA check phi, Epb surface (Boltzmann, ideal strep) 50000.png')
+    #plt.show()
     #plt.savefig('make_plotA_final2.pdf')
