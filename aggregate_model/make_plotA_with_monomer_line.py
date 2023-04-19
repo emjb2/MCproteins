@@ -1,17 +1,9 @@
 from aggregate_model.run_simulationA import run_simulationA
 import matplotlib.pyplot as plt
-import matplotlib
-import numpy as np
 from general_functions.line_to_array import line_to_array
-import seaborn
-from data.data_Ke_et_al import get_me_data
-import data.nadarajah_data as nadarajah_data
-import time as tme
 from general_functions.monomer_dimer_tetramer import plot_monomer_dimer_tetramer
-from matplotlib import colors
 
 def make_plotA_final(n, time, deltas):
-    start_time = tme.time()
     # first set our parameters
     k = 1.380649 * (10 ** (-23))
     T = 290
@@ -41,13 +33,6 @@ def make_plotA_final(n, time, deltas):
     for i in range(13):
         trial_points.append(trial_slope*i+(trial_mean-12*trial_slope))
     for y in range(0,4):
-    #    axis[0].plot(range(0,deltas), growth_rate[0][deltas * y:deltas * (y+1)], marker = '.', color = colours[y], label=r"$\phi$ = "+str(y+2)+r"$E_{pb}$")
-        #axis[0].plot(range(0,deltas), ke_data[0][13 * y:deltas * (y+1)], colours[-y-1])
-    #    axis[0].plot(range(13), trial_points)
-    #    axis[0].set_title(r'$E_{pb}=1kT$')
-    #    axis[0].set(xlabel=r'$\Delta$$\mu$ in multiples of $kT$', ylabel='Growth Rate')
-    #    axis[0].set_ylim([0, 0.6])
-    #    axis[0].legend()
 
         plt.plot(range(0,deltas), growth_rate[0][deltas * y:deltas * (y+1)], marker = '.', color = colours[y], label=r"$\phi$ = "+str(y+2)+r"$E_{pb}$")
         plt.plot(range(13), trial_points, color=colours[0])
@@ -57,22 +42,6 @@ def make_plotA_final(n, time, deltas):
         plt.ylim([0, 0.6])
         plt.xlim(0,deltas-1)
         plt.legend()
-
-
-        #axis[1].plot(range(0,deltas), ke_data[1][deltas * y:deltas * (y+1)], colours[-y-1])
-    #    axis[1].plot(range(0,deltas), growth_rate[1][deltas * y:deltas * (y+1)], marker = '.', color = colours[y], label=r"$\phi$ = "+str(y+2)+r"$E_{pb}$")
-    #    axis[1].set_title(r'$E_{pb}=2kT$')
-    #    axis[1].set(xlabel='$\Delta$$\mu$ in multiples of $kT$', ylabel='Growth  Rate')
-    #    axis[1].set_ylim([0, 0.6])
-    #    axis[1].legend()
-        #axis[2].plot(range(0,deltas), ke_data[2][deltas * y:deltas * (y+1)], colours[-y-1])
-    #    axis[2].plot(range(0,deltas), growth_rate[2][deltas * y:deltas * (y+1)], marker = '.', color = colours[y], label=r"$\phi$ = "+str(y+2)+r"$E_{pb}$")
-    #    axis[2].set_title(r'$E_{pb}=3kT$')
-    #    axis[2].set(xlabel='$\Delta$$\mu$ in multiples of $kT$', ylabel='Growth Rate')
-    #    axis[2].set_ylim([0, 0.6])
-    #    axis[2].legend()
     
-    print(tme.time() - start_time)
-    plt.savefig('IKEA aggregate with line.png')
-    #plt.savefig('make_plotA_final2.pdf')
+    #plt.savefig('IKEA aggregate with line.png')
     plt.show()
